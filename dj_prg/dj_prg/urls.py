@@ -18,8 +18,16 @@ from django.contrib import admin
 from django.urls import path
 from dj_app import views
 urlpatterns = [
+    #___статичные маршруты___
+
+
     path('admin/', admin.site.urls),
     path('',views.index, name = 'index'),
     path('about',views.about, name = 'about'),
-    path('contact',views.contact, name = 'contact')
+    path('contact',views.contact, name = 'contact'),
+
+    #___Динамические маршруты___
+
+    path('products', views.products, name='product_2'), #___передача данныъ по строке запроса способ 2
+
 ]
