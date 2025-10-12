@@ -27,7 +27,8 @@ urlpatterns = [
     path('contact',views.contact, name = 'contact'),
 
     #___Динамические маршруты___
+    path('productФ/<int:product_id>/<str:name>', views.product_1, name="product_1"),
+    path('products', views.product_2, name='product_2'), #___передача данныъ по строке запроса способ 2
 
-    path('products', views.products, name='product_2'), #___передача данныъ по строке запроса способ 2
 
 ]

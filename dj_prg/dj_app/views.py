@@ -31,6 +31,18 @@ def contact(request): # 3 способ с использованием HTML аб
 
     return render(request, "contact.html", context=context)
 
-def products(request):
-    product_id =request.GET.get("product_id")
-    return HttpResponse("Продукт №{}".format(product_id))
+
+
+# Метод обработки "Страницы продуктов №1"
+# [Способ 1. Передача ДАННЫХ через [интернет-адрес]
+# Пример URL: http://127.0.0.1:8000/products/10/Nokia
+def product_1(request, product_id, name):
+    return HttpResponse("<h2>Продукт №{}. Название: {}</h2>".format(product_id, name))
+
+# Метод обработки "Страницы продуктов №2"
+# [Способ 2. Передача ДАННЫХ [по строке запроса]
+# Пример URL: http://127.0.0.1:8000/products?product_id=8
+def product_2(request):
+    product_id = request.GET.get("product_id", "-")
+    name = request.GET.get("name", "-")
+    return HttpResponse("<h2>Продукт №{}. Название: {}</h2>".format(product_id, name))
