@@ -27,8 +27,15 @@ urlpatterns = [
     path('contact',views.contact, name = 'contact'),
 
     #___Динамические маршруты___
+    # [Способ 1. Передача ДАННЫХ через [интернет-адрес]
+    # Пример URL: http://127.0.0.1:8000/products/10/Nokia
     path('product/<int:product_id>/<str:name>', views.product_1, name="product_1"),
-    path('products', views.product_2, name='product_2'), #___передача данныъ по строке запроса способ 2
+    # [Способ 2. Передача ДАННЫХ [по строке запроса]
+    # Пример URL: http://127.0.0.1:8000/products?product_id=8&name=Samsung
+    path('products', views.product_2, name='product_2'),
 
+    # [Способ 3. Способ 1 + Способ 2]
+    # Пример URL: http://127.0.0.1:8000/products/6?name=LG
+    path('products/<int:product_id>', views.product_3, name="product_3"),
 
 ]

@@ -16,18 +16,29 @@ def index(request):
     html = "<h2>{}</h2><br> {} {}<br>{}<br>{}<br>{}".format("Главная страница", menu1,menu2,btn1,btn2,btn3)
 
     return HttpResponse(html)  # Способ 1 записать внутрь HTML код
-    pass
+
 # о себе
 def about(request):
     return HttpResponseRedirect("/")  # редирект на главную страницу
 
 def contact(request): # 3 способ с использованием HTML аблона
+    # --- ВАЖНЫЕ МОМЕНТЫ ---
+    # context - Переменная для передачи данных [Python] в [HTML шаблон]
+    # Тип данных переменной "context" - это всегда словарь "dict"
+    # Название [Ключей словаря] это будущие названия [Переменных в HTML]
+
+    # Jinja2 - Шаблонизатор. Описание синтаксиса Python в HTML
+    # static - Папка содержащая в основном "ФАЙЛЫ СТАТИЧЕСКИЕ" и "СSS ТАБЛИЦЫ СТИЛЕЙ"
+    # media - Папка содержащая в основном "ФАЙЛЫ МЕДИА ДИНАМИЧЕСКИЕ"
+    # templates - Папка содержит в основном ФАЙЛЫ ШАБЛОНОВ
+
+    # Входные данные для шаблона
 
     name ='Вася'
     time = datetime.now()
     number = '37529999999'
     names = ["Осипов Егор", "Воробьева Рената"]
-    context = {'NUMBER': number, 'NAME': name, "TIME":time,"NAMES": names}# Способ для передачи данных из питон в HTMl
+    context = {'NUMBER': number, 'NAME': name, "TIME":time,"NAMES": names, "AGE":'18'}# Способ для передачи данных из питон в HTMl
 
     return render(request, "contact.html", context=context)
 
@@ -44,5 +55,12 @@ def product_1(request, product_id, name):
 # Пример URL: http://127.0.0.1:8000/products?product_id=8
 def product_2(request):
     product_id = request.GET.get("product_id", "-")
+    name = request.GET.get("name", "-")
+    return HttpResponse("<h2>Продукт №{}. Название: {}</h2>".format(product_id, name))
+
+# Метод обработки "Страницы продуктов №3"
+# [Способ 3. Способ 1 + Способ 2]
+# Пример URL: http://127.0.0.1:8000/products/6?name=LG
+def product_3(request, product_id):
     name = request.GET.get("name", "-")
     return HttpResponse("<h2>Продукт №{}. Название: {}</h2>".format(product_id, name))

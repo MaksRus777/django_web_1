@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-контакты
+Контакты
 {% endblock title%}
 {% load static %}
 
@@ -23,4 +23,12 @@
         <li>{{name}}</li>
     {% endfor%}
     </ul>
+    <hr>
+    <br>
+    <h2>Шаблонищатор Jinja2 и его теги</h2>
+    <p> Переменная (python): {{AGE}}</p>
+    <P>Дата: {% now "d.m.y. H.i.s." %}</P>
+    <p>Условия: {%if AGE >= 18%} Взрослый {%else%} Молод {% endif %}</p>
+    <p>Цикл: {% for i in lst %} {{ i }} {% empty %} Списка нет или он пуст! {% endfor %}</p>
+    <p>Переменная (шаблона): {% with name="Дмитрий" number="+375(29)223-34-44" %} {{ name }} : {{ number }} {% endwith %}</p>
 {% endblock body%}
